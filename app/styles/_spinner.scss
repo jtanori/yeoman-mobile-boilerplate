@@ -1,0 +1,30 @@
+@import "mixins";
+
+#spinner{
+	@include cover;
+	text-align: center;
+	background: transparentize(black, 0.4);
+	z-index: 3;
+
+	.loading-indicator{
+		height: 4em;
+		position: absolute;
+		top: 50%;
+		margin-top: -2em;
+		left: 0;
+		right: 0;
+		color: #fff;
+		text-shadow: 1px 1px 1px black;
+		text-transform: capitalize;
+		z-index: 4;
+		text-align: center;
+
+		.loading-indicator-spinner{
+			position: relative;
+			margin: 0 auto;
+			display: block;
+			width: 36px;
+			height: 36px;
+		}
+	}
+}

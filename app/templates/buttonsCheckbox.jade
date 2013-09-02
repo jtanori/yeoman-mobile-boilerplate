@@ -1,0 +1,6 @@
+include button
+
+mixin buttonsCheckbox(g)
+	.btn-group(class=g.className, data-toggle='buttons-checkbox')
+		each b in g.items
+			mixin button(b)

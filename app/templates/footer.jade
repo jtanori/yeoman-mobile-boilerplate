@@ -1,0 +1,10 @@
+- if(footer && footer.items)
+    div(id=footer.id, class=footer.className, data-theme=footer.theme, data-role="footer")
+        ul.items.clearfix
+            each item in footer.items
+                li
+                    div(href=item.href, id=item.id, class=item.className, data-page-id=item.pageId)
+                        - if(item.HTMLContent)
+                            | !{item.HTMLContent}
+                        - else
+                            | text

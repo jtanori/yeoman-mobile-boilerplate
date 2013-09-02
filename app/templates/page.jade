@@ -1,0 +1,8 @@
+div(data-role="page", class=className, id=id)
+	- if(header)
+		include header
+
+	include page_content
+
+	- if(footer)
+		!{footer}

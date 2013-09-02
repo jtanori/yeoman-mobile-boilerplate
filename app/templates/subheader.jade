@@ -1,0 +1,12 @@
+- console.log('subheader', subheader)
+div(class=subheader.className, id=subheader.id)
+	- if (subheader.form)
+		form(id=subheader.form.id)
+			- if(subheader.form.input)
+				- var i = subheader.form.input
+				input(class=i.className, id=i.id, type=i.type, placeholder=i.placeholder, value=i.value, data-inline="true")
+			- if(subheader.form.button)
+				- var b = subheader.form.button
+				button(id=b.id, class=b.className, type=b.type, data-inline=true) #{b.text}
+	- else
+		!{subheader.content || ''}

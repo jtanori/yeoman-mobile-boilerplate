@@ -1,0 +1,74 @@
+.btn-ternary {
+    @include buttonBackground($btnTernaryBackgroundHighlight, $btnTernaryBackground);
+    color: $centerDark;
+    text-shadow: 0.1em 0.1em transparentize($btnTernaryBackgroundHighlight, 0.3);
+}
+
+
+// Back/Front buttons
+// --------------------------------------------------
+//
+
+// Make a button with back/forward iOS style
+/*
+.btn.back{
+    position: relative;
+
+    span{
+        position: relative
+    }
+}
+
+.btn.back:before {
+    content: '';
+    display: block;
+    height: 21px;
+    left: -11px;
+    position: absolute;
+    top: 3px;
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    width: 21px;
+}
+
+
+// Set the backgrounds
+// -------------------------
+.btn-primary.back:before {
+    @include buttonBackground($btnPrimaryBackground, $btnPrimaryBackgroundHighlight);
+}
+
+.btn-secondary.back:before {
+    @include buttonBackground($btnSecondaryBackgroundHighlight, $btnSecondaryBackground);
+}
+
+.btn-ternary.back:before {
+    @include buttonBackground($btnTernaryBackgroundHighlight, $btnTernaryBackground);
+}
+
+// Warning appears are orange
+.btn-warning.back:before {
+    @include buttonBackground($btnWarningBackground, $btnWarningBackgroundHighlight);
+}
+
+// Danger and error appear as red
+.btn-danger.back:before {
+    @include buttonBackground($btnDangerBackground, $btnDangerBackgroundHighlight);
+}
+
+// Success appears as green
+.btn-success.back:before {
+    @include buttonBackground($btnSuccessBackground, $btnSuccessBackgroundHighlight);
+}
+
+// Info appears as a neutral blue
+.btn-info.back:before {
+    @include buttonBackground($btnInfoBackground, $btnInfoBackgroundHighlight);
+}
+
+// Inverse appears as dark gray
+.btn-inverse.back:before {
+    @include buttonBackground($btnInverseBackground, $btnInverseBackgroundHighlight);
+}*/

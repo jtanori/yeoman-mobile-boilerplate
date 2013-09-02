@@ -1,0 +1,24 @@
+.search-bar{
+	max-width: 100%;
+	font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
+	padding: 0.5em;
+	box-shadow: 0 0 1px #000 inset;
+	background: #303030;
+	border: 0;
+	border-bottom: 1px solid #000;
+
+	form {
+		padding: 0;
+		margin: 0;
+		input[type=text]{
+			width: 79%;
+			display: inline-block;
+			margin: 0 0.3em 0 0;
+			vertical-align: middle;
+		}
+		button {
+			width: 15%;
+			margin: 0;
+		}
+	}
+}

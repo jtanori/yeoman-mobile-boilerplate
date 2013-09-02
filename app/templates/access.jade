@@ -1,0 +1,18 @@
+div
+    include logo
+    .ui-grid-a
+        .ui-block-a
+            .ui-wrapper-a.alpha
+                div#login.btn.btn-large.btn-block.btn-primary(href='#')
+                    i.icon-key
+                    | #{i18n.Login}
+        .ui-block-b
+            .ui-wrapper-a.omega
+                div#signup.btn.btn-large.btn-block.btn-primary(href='#')
+                    i.icon-lock
+                    | #{i18n.Signup}
+    hr.hr-a
+    div
+        div#facebook.btn.btn-block.btn-large.btn-info.disabled(href='#')
+            i.icon-facebook
+            !{i18n['Signup via Facebook']}

@@ -1,0 +1,147 @@
+@import "../bower_components/sass-bootstrap/lib/variables";
+
+$bootstrapLib: "../bower_components/sass-bootstrap/lib/";
+
+//
+// Variables
+// --------------------------------------------------
+
+// Global values
+// --------------------------------------------------
+
+// Grays
+// -------------------------
+$black: black !default;
+$grayDarker: #222222 !default;
+$grayDark: #333333 !default;
+$gray: #555555 !default;
+$grayLight: #999999 !default;
+$grayLighter: #eeeeee !default;
+$white: white !default;
+
+// Accent colors
+// -------------------------
+$blue: #049cdb !default;
+$blueDark: #0064cd !default;
+$green: #46a546 !default;
+$red: #9d261d !default;
+$yellow: #ffc40d !default;
+$orange: #f89406 !default;
+$pink: #c3325f !default;
+$purple: #7a43b6 !default;
+$centerNavy: #003255;
+$centerMagenta: #ec008c;
+$centerOrange: #f8971d;
+$centerGreen: #bfd730;
+$centerBlue: #35b1ef;
+$centerBlueMedium: #0092bd;
+$centerGreenMedium: #97ad33;
+$centerOrangeMedium: #d5791a;
+$centerMagentaMedium: #c51277;
+$colorDiffLight: #72a1fc;
+$colorDiffDark: #101b32;
+$centerGold: #e39630;
+$centerGoldLight: #f9ba5c;
+$centerDark: #272727;
+
+// Scaffolding
+// -------------------------
+$bodyBackground: $white !default;
+$textColor: $grayDark !default;
+
+// Links
+// -------------------------
+$linkColor: $centerNavy !default;
+$linkColorHover: darken($linkColor, 15%) !default;
+
+$baseBorderRadius: 3px !default;
+$borderRadiusLarge: 5px !default;
+$borderRadiusSmall: 2px !default;
+
+// Buttons
+// -------------------------
+$btnBackground: $centerNavy !default;
+$btnBackgroundHighlight: lighten($centerNavy, 0.1) !default;
+$btnBorder: rgb(132, 132, 132) !default;
+
+$btnPrimaryBackground: rgb(130, 130, 130) !default;
+$btnPrimaryBackgroundHighlight: rgb(108, 108, 108) !default;
+
+$btnSecondaryBackground: rgb(0, 67, 105) !default;
+$btnSecondaryBackgroundHighlight: rgb(0, 117, 180) !default;
+
+$btnTernaryBackgroundHighlight: $centerGoldLight !default;
+$btnTernaryBackground: $centerGold;
+
+$btnInfoBackground: rgb(83, 117, 170) !default;
+$btnInfoBackgroundHighlight: rgb(68, 98, 150) !default;
+
+$btnSuccessBackground: $centerGreen !default;
+$btnSuccessBackgroundHighlight: $centerGreenMedium !default;
+
+$btnWarningBackground: lighten($centerOrange, 15%) !default;
+$btnWarningBackgroundHighlight: $centerOrangeMedium !default;
+
+$btnDangerBackground: #ee5f5b !default;
+$btnDangerBackgroundHighlight: #bd362f !default;
+
+$btnInverseBackground: #444444 !default;
+$btnInverseBackgroundHighlight: $grayDarker !default;
+
+// Forms
+// -------------------------
+$inputBackground: whitesmoke !default;
+$inputBorder: #f9bea2 !default;
+$inputBorderRadius: $baseBorderRadius !default;
+$inputDisabledBackground: $grayLighter !default;
+$formActionsBackground: whitesmoke !default;
+$inputHeight: $baseLineHeight + 10px;
+
+// Hr border color
+// -------------------------
+$hrBorder: $colorDiffDark !default;
+$hrBorderLight: opacify($colorDiffLight, 0.3);
+
+$primary-font: "";
+$primary-font-bold: "";
+$primary-font-light: "";
+$secondary-font: "";
+
+$base-font-size: 16px;
+
+// Base Relative size (iPhone 5)
+$base-width: 640px;
+$base-height: 960px;
+
+// Menu and contacts width
+$menu-width: 82%;
+
+// Text style
+@mixin grey-text {
+    color: #b6b6b0;
+}
+
+@mixin font-medium-size {
+    font-size: em(17px);
+}
+
+@mixin font-small-size {
+    font-size: em(13px);
+}
+
+$base-space: 2.471%;
+
+$backgroundImage: "/images/bg.jpg";
+
+$merriweatherSansbold: "";
+$merriweatherSansregular: "";
+$merriweatherSanslight: "";
+
+$sansFontFamilyRegular: $primary-font, $sansFontFamily;
+$sansFontFamilyBold: $primary-font-bold, $sansFontFamily;
+$sansFontFamilyLight: $primary-font-light, $sansFontFamily;
+
+$blankPNG: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR42mNgAAIAAAUAAen63NgAAAAASUVORK5CYII=';
+
+$bgNav: $blankPNG;
+$bgPage: $blankPNG;
