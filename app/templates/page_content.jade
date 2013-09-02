@@ -1,0 +1,6 @@
+div(data-role="content", id="iscroll")
+	div(data-role="scroller")
+		div(class="content")
+			- if(content)
+				- console.log('content found')
+				!{content}

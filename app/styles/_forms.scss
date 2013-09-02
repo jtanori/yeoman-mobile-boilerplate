@@ -1,0 +1,47 @@
+//*********************
+// Forms
+//*********************
+.ctrl-holder {
+    padding: 0 0 1em;
+    input {
+        margin: 0;
+        &+.input-helper {
+            font-size: small;
+            color: rgb(166, 166, 166);
+            padding-left: 1em;
+        }
+    }
+    .month {
+        width: auto;
+    }
+    .year {
+        width: auto;
+    }
+}
+
+div>.ctrl-holder:last-child {
+    padding-bottom: 0;
+}
+
+[type="checkbox"] {
+    display: inline-block;
+    margin-right: 2em;
+    i {
+        vertical-align: middle;
+        margin-right: 0.5em;
+    }
+    &+label {
+        display: inline-block;
+        margin-left: 1em;
+    }
+}
+
+#iscroll,
+.dialog .dialog-scroller{
+    input, textarea, select {
+        -webkit-user-select: auto;
+        -moz-user-select: auto;
+        -ms-user-select: auto;
+        user-select: auto;
+    }
+}

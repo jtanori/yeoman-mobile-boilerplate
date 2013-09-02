@@ -1,0 +1,28 @@
+include button
+include buttonsCheckbox
+
+div.ui-header-wrapper
+	div.ui-header
+		- if (header && header.primary)
+			#primary
+				- var p = header.primary
+				- p.className = p.className ? 'left ' + p.className : 'btn-primary';
+				mixin button(p)
+		- if(header && header.center)
+			- console.log('header center', header.center)
+			- var className = header.center.className ? header.center.className : 'center'
+			#center(class=className)
+				h1#title
+					!{header.center.content}
+		-if (header && header.secondary)
+			#secondary
+				- var s = header.secondary
+				- s.className = s.className ? 'right ' + s.className : 'btn-primary';
+				case header.secondary.toggle
+					when 'buttons-checkbox'
+						mixin buttonsCheckbox(s)
+					default
+						mixin button(s)
+	- if(header && header.subheader)
+		- var subheader = header.subheader
+		include subheader

@@ -1,0 +1,26 @@
+include button
+include icon
+
+
+- var wbuttons = buttons ? 'w-buttons' : ''
+
+div.dialog-overlay.js-dialog-overlay
+div.dialog-container(class=wbuttons)
+	div.dialog-wrapper
+		if(header)
+			header
+				- var icon = {name: "close js-dialog-close"}
+				mixin icon(icon)
+				if(title)
+					h3.title !{title}
+		.dialog-scroller
+			- var contentTag = form ? 'form' : 'div'
+
+			#{contentTag}.dialog-content(id=name)
+
+				!{content}
+
+		- if(buttons)
+			div.dialog-buttons
+				each button in buttons
+					mixin button(button)

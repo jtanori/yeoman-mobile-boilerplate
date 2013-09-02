@@ -1,0 +1,85 @@
+@import "variables";
+
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+html {
+  height: 100%;
+  font-size: $base-font-size;
+  font-family: $primary-font;
+  @media (max-device-width: 640px) {
+    font-size: $base-font-size * 2;
+  }
+  @media (max-device-width: 320px) {
+    font-size: $base-font-size;
+  }
+}
+
+body {
+  background-color: #e8e8e6;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  margin: 0 auto;
+}
+
+img {
+  vertical-align: middle;
+}
+
+ul {
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+//Base styles
+#logo {
+  max-width: 220px;
+  margin: 0 auto 2em;
+}
+
+//Override button
+.btn {
+  border: 1px solid $colorDiffDark;
+  border-bottom-color: darken($colorDiffDark, 20%);
+  font-family: $sansFontFamilyRegular;
+  &.btn-link {
+    border: 0 !important;
+  }
+}
+
+.section-heading {
+  line-height: 2em;
+  margin: 0 0 1em;
+}
+
+a[class^="btn"]:-webkit-any-link {
+  text-decoration: none;
+}
+
+//Misc
+.al-center{
+  text-align: center;
+}
+
+.al-left{
+  text-align: left;
+}
+
+.al-right{
+  text-align: right;
+}
+
+.ui-block{
+    display: block;
+    width: 100%;
+}
