@@ -49,20 +49,14 @@ require.config({
         'underscore': {
             exports: '_'
         },
-        'app': {
-            deps: [
-                'backbone',
-                'backbone.validation',
-                'spinjs',
-                'setup',
-                'jade',
-                'zepto-touch',
-                'zepto-cookie',
-                'ftscroller'
-            ]
+        'setup': {
+            deps: ['backbone.validation']
         },
         'setup': {
-            deps: ['backbone', 'functional', 'aspect']
+            deps: ['backbone.validation', 'ftscroller', 'jade', 'zepto-touch', 'zepto-cookie', 'spinjs', 'functional', 'aspect']
+        },
+        'config': {
+            deps: ['setup']
         },
         'ftscroller': {
             exports: 'FTScroller'

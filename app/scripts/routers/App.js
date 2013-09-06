@@ -1,15 +1,11 @@
 /* global Backbone, define, aspect, console, _, $ */
 define(
     [
-        'views/Index',
-        'Footer',
-        'models/User',
-        'models/ShoppingCart',
-        'exceptions/Redirect'
+        'modules/Core',
+        'modules/Pages'
     ],
-    function (Index, Footer, User, ShoppingCartModel, Redirect) {
+    function (Core, Pages) {
         'use strict';
-
         var Router = new(Backbone.Router.extend({
             currentView: null,
             currentDialog: null,
@@ -74,6 +70,7 @@ define(
                 }.bind(this);
                 //TODO: Rename to something more meaningful
                 var beforeLogin = function () {
+                    var Redirect = Core.exception.Redirect;
                     //Do user check (login)
                     var user = this.getUser();
                     console.log('user is authenticated', user.isAuthenticated());
@@ -88,6 +85,7 @@ define(
 
                 //Only checked in user allowed
                 var beforeCheckin = function () {
+                    var Redirect = Core.exception.Redirect;
                     var user = this.getUser();
                     //Venue Check
                     if (!user.isInVenue()) {
@@ -105,9 +103,9 @@ define(
                         //Will show the footer if user is authenticated
                         var f = this.getFooter();
                         //Get the parent group for this page
-                        var parentGroup = Backbone.history.fragment.split('/')[0] || "";
+                        var parentGroup = Backbone.history.fragment.split('/')[0] || '';
 
-                        if (f instanceof Footer) {
+                        if (f instanceof Core.view.Footer) {
                             console.log(f.currentGroup, 'currentGroup', parentGroup);
                             if (parentGroup && f.currentGroup !== parentGroup) {
                                 f.setGroup(parentGroup);
@@ -116,7 +114,7 @@ define(
                             }
                         }
                     } catch (e) {
-                        console.log(e, e.stack, "Can't set this page as current");
+                        console.log(e, e.stack, 'Can\'t set this page as current');
                     }
                 }.bind(this);
                 //Remove footer if the pages does not need it
@@ -155,7 +153,7 @@ define(
                         footer = this.footer;
                     } else if (createit) { //If it is set to be created
                         console.log('will create user');
-                        footer = this.footer = new Footer();
+                        footer = this.footer = new Core.view.Footer();
                         footer.$el.appendTo($('body'));
                     }
                 } else if (this.footer) {
@@ -170,22 +168,23 @@ define(
                 var user = this.user;
 
                 if (!this.user) {
-                    this.user = user = new User();
+                    this.user = user = new Core.model.User();
                 }
 
                 return user;
             },
             //Get shopping cart
             getCart: function () {
-                var data = [];
                 var user = this.getUser();
+                var ShoppingCartModel = Core.model.ShoppingCartModel;
                 //TODO: Create proper after-login hook to move
                 //      cart data to proper user
                 //Cart will be available only to logged in users
                 //if(user.isAuthenticated()){
                 if (_.isNull(this.cart) || !(this.cart instanceof ShoppingCartModel)) {
                     this.cart = new ShoppingCartModel({
-                        'userName': user.get('username')
+                        userName: user.get('username'),
+                        model: user
                     });
                     //Fetch local data
                     //TODO: Seamsly integrate with fetch/sync methods
@@ -209,8 +208,8 @@ define(
                         replace: false
                     });
                 }, this);
-                //Create "stateless" token/user
-                var user = this.getUser();
+                //Create 'stateless' token/user
+                this.getUser();
                 //cache
                 this.$body = $('body');
 
@@ -241,20 +240,20 @@ define(
 
             //Le home
             defaultAction: function () {
-                this.currentView = new Index();
+                this.currentView = new Pages.Index();
             },
             /**
              * Access screen
              * Displays access options (Login/Register/Facebook Connect)
              */
-            access: function (method) {
+            access: function () {
                 var user = this.getUser();
                 var referrer = window.referrer || false;
                 var dest = 'home';
 
                 if (user.isAuthenticated()) {
                     try {
-                        if (app) {
+                        if (referrer) {
                             dest = referrer.previous;
                         }
 
@@ -268,7 +267,7 @@ define(
                     return;
                 }
 
-                var view = this.currentView = new AccessView({
+                this.currentView = new Pages.Access({
                     model: user
                 }); //Auto renders
             }

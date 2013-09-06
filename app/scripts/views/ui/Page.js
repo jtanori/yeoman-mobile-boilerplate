@@ -23,7 +23,7 @@ define([
 		dialog: false,
 		spinner: false,//Spinner view TODO: Move to initialization for reusage
 		content: empty,
-		loadingLabel: (function(){return i18n['__indicator__...'].replace('__indicator__', i18n['Loading']);})(),
+		loadingLabel: (function(){return i18n['__indicator__...'].replace('__indicator__', i18n.Loading);})(),
 		events: {
 			'tap [data-target]': 'openPage',
 			'tap .back': 'back',
@@ -38,12 +38,13 @@ define([
 				aspect.add(this, this.refreshAfterMethods, this.scrollRefresh.bind(this), 'after');
 			}*/
 			console.log('initialize page', this.loadingLabel);
+			document.addEventListener('touchmove', this.preventDefault.bind(this), false);
 			this.spinner = new Spinner();
 			return this;
 		},
 
 		onClose: function(){
-			aspect.remove(this, 'render', this.afterRender);
+			aspect.remove(this, 'render', this.afterRender.bind(this), 'after');
 			if(this.useScroll && this.scroll instanceof FTScroller){
 				this.scroll.destroy();
 				this.scroll = null;
@@ -51,6 +52,7 @@ define([
 
 			if(this.spinner && this.spinner instanceof Spinner){
 				this.spinner.close();
+                this.spinner = null;
 			}
 
 			if(this.dialog instanceof Dialog){
@@ -204,16 +206,20 @@ define([
         		return this.scroll;
         	}
 
-        	this.scroll = new FTScroller(
-				this.$scroller[0],
-				{
-					scrollingX: false,
-					alwaysScroll: true,
-					hardwareAccelarated: false,
-					updateOnWindowResize: true,
-					scrollbars: false
-				}
-			);
+            this.scroll = new FTScroller(
+                this.$scroller[0], {
+                    scrollingX: false,
+                    alwaysScroll: true,
+                    hardwareAccelarated: false,
+                    updateOnWindowResize: true,
+                    enableRequestAnimationFrameSupport: false,
+                    scrollbars: false,
+                    bouncing: false,
+                    maxFlingDuration: 100,
+                    scrollBoundary: 0,
+                    scrollResponseBoundary: 0
+                }
+            );
 
 			return this.scroll;
         }

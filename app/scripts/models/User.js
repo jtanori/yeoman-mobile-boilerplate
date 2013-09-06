@@ -4,7 +4,6 @@ define([
     'config'
 ], function (LocationModel, config) {
     'use strict';
-    
     return Backbone.Model.extend({
         ready: false,
         idAttribute: 'user_id',
