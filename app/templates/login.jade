@@ -1,0 +1,11 @@
+.al-left
+    .ctrl-holder
+        input(type='email', id='username', name='username', placeholder=i18n.Username, tabindex=1)
+        .input-helper
+            small #{i18n['Must be a valid email address']}
+    .ctrl-holder
+        input(type='password', id='password', name='password', placeholder=i18n.Password, tabindex=1)
+    .error-container.hide
+        .alert.alert-error
+
+    // input(type='checkbox')

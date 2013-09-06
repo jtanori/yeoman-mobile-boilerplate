@@ -1,0 +1,17 @@
+div
+    .ctrl-holder
+        input(type='text', name='username', placeholder=i18n.Username, tabindex='1')
+            .input-helper
+                small Must be a valid email address
+    .ctrl-holder
+        input(type='password', name='password', placeholder=i18n.Password, tabindex='2')
+    .ctrl-holder
+        input(type='password', name='password-confirm', placeholder=i18n['Confirm Password'], tabindex='3')
+        .input-helper
+            small #{i18n['Must match password field']}
+    //-
+        .ctrl-holder
+            input.inline(type='checkbox', name='accept-tos')
+            label.inline(for='keep-login') Accept TOS
+    .error-container.hide
+        .alert.alert-error

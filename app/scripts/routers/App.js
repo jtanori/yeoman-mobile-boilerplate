@@ -1,11 +1,16 @@
 /* global Backbone, define, aspect, console, _, $ */
 define(
-    [
-        'modules/Core',
-        'modules/Pages'
-    ],
+    ['modules/Core', 'modules/Pages'],
     function (Core, Pages) {
         'use strict';
+
+        var View = Core.view;
+        var Model = Core.model;
+        var Exception = Core.exception;
+
+        var Index = Pages.Index;
+        var Access = Pages.Access;
+
         var Router = new(Backbone.Router.extend({
             currentView: null,
             currentDialog: null,
@@ -70,7 +75,7 @@ define(
                 }.bind(this);
                 //TODO: Rename to something more meaningful
                 var beforeLogin = function () {
-                    var Redirect = Core.exception.Redirect;
+                    var Redirect = Exception.Redirect;
                     //Do user check (login)
                     var user = this.getUser();
                     console.log('user is authenticated', user.isAuthenticated());
@@ -85,7 +90,7 @@ define(
 
                 //Only checked in user allowed
                 var beforeCheckin = function () {
-                    var Redirect = Core.exception.Redirect;
+                    var Redirect = Exception.Redirect;
                     var user = this.getUser();
                     //Venue Check
                     if (!user.isInVenue()) {
@@ -105,7 +110,7 @@ define(
                         //Get the parent group for this page
                         var parentGroup = Backbone.history.fragment.split('/')[0] || '';
 
-                        if (f instanceof Core.view.Footer) {
+                        if (f instanceof View.Footer) {
                             console.log(f.currentGroup, 'currentGroup', parentGroup);
                             if (parentGroup && f.currentGroup !== parentGroup) {
                                 f.setGroup(parentGroup);
@@ -153,7 +158,7 @@ define(
                         footer = this.footer;
                     } else if (createit) { //If it is set to be created
                         console.log('will create user');
-                        footer = this.footer = new Core.view.Footer();
+                        footer = this.footer = new View.Footer();
                         footer.$el.appendTo($('body'));
                     }
                 } else if (this.footer) {
@@ -168,7 +173,7 @@ define(
                 var user = this.user;
 
                 if (!this.user) {
-                    this.user = user = new Core.model.User();
+                    this.user = user = new Model.User();
                 }
 
                 return user;
@@ -176,7 +181,7 @@ define(
             //Get shopping cart
             getCart: function () {
                 var user = this.getUser();
-                var ShoppingCartModel = Core.model.ShoppingCartModel;
+                var ShoppingCartModel = Model.ShoppingCartModel;
                 //TODO: Create proper after-login hook to move
                 //      cart data to proper user
                 //Cart will be available only to logged in users
@@ -240,7 +245,7 @@ define(
 
             //Le home
             defaultAction: function () {
-                this.currentView = new Pages.Index();
+                this.currentView = new Index();
             },
             /**
              * Access screen
@@ -267,7 +272,7 @@ define(
                     return;
                 }
 
-                this.currentView = new Pages.Access({
+                this.currentView = new Access({
                     model: user
                 }); //Auto renders
             }

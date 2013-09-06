@@ -1,0 +1,38 @@
+include button
+
+.al-left
+  .ctrl-holder
+    select.credit-card-type.ui-block(name="type")
+      - var selectedVisa = false, selectedMasterCard = false, selectedAmex = false;
+      - if(type === i18n['Visa']) selectedVisa = true;
+      - if(type === i18n['Master Card']) selectedMasterCard = true;
+      - if(type === i18n['American Express']) selectedAmex = true;
+
+      option() #{i18n['Select your credit card']}
+      option(selected=selectedVisa) #{i18n['Visa']}
+      option(selected=selectedMasterCard) #{i18n['Master Card']}
+      option(selected=selectedAmex) #{i18n['American Express']}
+
+  .ctrl-holder
+    input(type="text", name="number", placeholder=i18n['Credit card number'], tabindex=1, value=number)
+  .ctrl-holder
+    input(type="text", name="cvv", placeholder=i18n['Verification code'], tabindex=1, value=cvv)
+    mixin button({id:'cvv-help', className: 'btn-link', icon: {name: 'info'}})
+  .ctrl-holder
+    label #{i18n['Expiration Date']}
+    select.month(name="expirationDateMonth")
+      - for(var x = 1; x <= 12; x++)
+        - if( x == expirationDateMonth)
+          option(selected=true) #{x}
+        - else 
+        option #{x} 
+    select.year(name='expirationDateYear')
+      - for(var y = 13; y <= 20; y++)
+        - if(y == expirationDateYear)
+          option(selected=true) #{y}
+        - else
+        option #{y}
+  .ctrl-holder
+    input(type="text", name="name", placeholder=i18n['Name on Card'], tabindex=1, value=name)
+  .error-container.hide
+    .alert.alert-error

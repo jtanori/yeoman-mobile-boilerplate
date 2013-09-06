@@ -1,4 +1,4 @@
-/* global define, $, Backbone, _, console */
+/* global define, $, Backbone, _ , console*/
 define([
     'models/Location',
     'config'
@@ -10,7 +10,8 @@ define([
         defaults: {
             username: null,
             password: null,
-            token: null
+            token: null,
+            location: null
         },
         labels: {
             username: 'Username',
@@ -30,29 +31,31 @@ define([
         url: function () {
             return this.urlRoot + '/customer/api-token-auth/';
         },
-        location: new LocationModel(),
         initialize: function () {
 
             this.on('sync', this.saveToLocal, this);
             this.on('change', this.saveToLocal, this);
-            this.listenTo(this.location, 'change', this.saveToLocal);
+            this.listenTo(this, 'change:location', this.saveToLocal, this);
 
             var savedToken = JSON.parse($.fn.cookie('token'));
             var savedLocation = savedToken && savedToken.location ? savedToken.location : false;
 
             //Load data form local
             if (savedToken) {
-                //Save location if any
-                if (savedLocation && savedLocation.id) {
-                    this.location.set(savedLocation, {
-                        silent: true
-                    });
-                }
+                //Create new location model if needed
+                var l = new LocationModel();
                 //TODO: Dont' need to save to local again, we're getting data from there
                 this.set(savedToken, {
                     silent: true
                 });
 
+
+                //Save location if any
+                if (savedLocation && savedLocation.id) {
+                    l.set(savedLocation);
+                }
+                //Set model
+                this.set({'location': l}, {silent: true});
                 //Reload token if expired
                 if (this.isExpired()) {
                     this.reload();
@@ -76,8 +79,8 @@ define([
             return Backbone.Model.prototype.fetch.call(this, options);
         },
         parse: function (response) {
-            if (response && response.expirationTimestamp) {
-                response.expirationTimestamp *= 1000;
+            if (response && response.expiration_timestamp) {
+                response.expiration_timestamp *= 1000;
             }
 
             return response;
@@ -89,7 +92,6 @@ define([
         isExpired: function () {
             //var now = (new Date()) * 1;
             //var expires = this.get('expiration_timestamp');
-
             return false;
             //return (now - expires) > 0;
         },
@@ -103,7 +105,10 @@ define([
         },
         isInVenue: function () {
             console.log(this.location, 'location check');
-            return this.location && this.location.get('id');
+            var l = this.get('location');
+
+            if(l && l instanceof LocationModel && l.get('id')){ return true; }
+            else{return false;}
         },
         //Set state as not ready and fetch data again
         reload: function () {
@@ -112,8 +117,14 @@ define([
         },
         saveToLocal: function () {
             var data = this.toJSON();
+            var l = data.location;
+            if(l && l instanceof LocationModel){
+                l = data.location.toJSON();
+            }else{
+                l = {};
+            }
             //Convert location to cookie-compatible object
-            data.location = this.location.toJSON();
+            data.location = l;
 
             $.fn.cookie('token', JSON.stringify(data));
         },
@@ -122,6 +133,7 @@ define([
             this.clear({
                 silent: true
             });
+            this.ready = false;
             $.fn.cookie('token', null);
             //Let the app know that we're out of the system
             Backbone.trigger('session.logout');

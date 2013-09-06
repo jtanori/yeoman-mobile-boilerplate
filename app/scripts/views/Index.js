@@ -1,7 +1,7 @@
 /* global define */
 define(
     [
-        'Page',
+        'views/ui/Page',
         'templates.jade/index'
     ],
     function(Page, template) {

@@ -1,12 +1,12 @@
 /* global define, aspect, $, _, console */
 define(
     [
-        'Page',
-        'Dialog',
+        'views/ui/Page',
+        'views/ui/Dialog',
         'templates.jade/access',
         'views/dialog/Login',
         'views/dialog/Signup',
-        'model/Signup'
+        'models/Signup'
     ],
     function(Page, Dialog, content, Login, Signup, SignupModel) {
         'use strict';

@@ -1,9 +1,9 @@
 /* global _, Backbone, define, console */
-define(['exceptions/Redirect', 'backbone.validation', 'jade'],
-    function(Redirect, v, j){
+define(['exceptions/Redirect', 'i18n!nls/app'],
+    function(Redirect, i18n){
         'use strict';
         //Add jade to the global scope
-        window.jade = j;
+        window.i18n = i18n;
         //Add basic feature detection
         var capabilities= {
             //Storage
@@ -74,6 +74,22 @@ define(['exceptions/Redirect', 'backbone.validation', 'jade'],
                     Backbone.history.navigate('error', {trigger: true});
                     console.error(e, e.message, e.stack);
                 }
+            }
+        };
+
+        //TODO: Fix scope
+        Array.prototype.list = function(){
+            var limit = this.length;
+            var orphans = arguments.length - limit;
+            var scope = orphans > 0  && typeof(arguments[arguments.length-1]) !== 'string' ? arguments[arguments.length-1] : window;
+
+            while(limit--){scope[arguments[limit]] = this[limit];}
+
+            if(scope !== window) {orphans--;}
+
+            if(orphans > 0){
+                orphans += this.length;
+                while(orphans-- > this.length) {scope[arguments[orphans]] = null;}
             }
         };
     }

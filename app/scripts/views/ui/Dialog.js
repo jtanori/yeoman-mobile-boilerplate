@@ -1,6 +1,6 @@
 /*global _, $, Backbone, define, aspect, FTScroller */
 define([
-    'view/Spinner',
+    'views/ui/Spinner',
     'config',
     'templates.jade/dialog_generic',
     'templates.jade/empty'

@@ -6,7 +6,7 @@ define(
         var a = require('views/ui/Page');
         var b = require('views/ui/Dialog');
         var c = require('views/ui/Footer');
-        var d = require('views/Spinner');
+        var d = require('views/ui/Spinner');
 
         var e = require('models/User');
         var f = require('models/Location');
@@ -28,7 +28,7 @@ define(
                 ShoppingCart: g
             },
             exception: {
-                Orders: h
+                Redirect: h
             }
         };
     }

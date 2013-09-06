@@ -25,10 +25,7 @@ require.config({
         'jade': 'templates/jade',
         'templates.jade': 'templates/',
 
-        'app': 'routers/App',
-        'Page': 'views/ui/Page',
-        'Dialog': 'views/ui/Dialog',
-        'Footer': 'views/ui/Footer'
+        'app': 'routers/App'
     },
     shim: {
         'zepto': {
@@ -48,9 +45,6 @@ require.config({
         },
         'underscore': {
             exports: '_'
-        },
-        'setup': {
-            deps: ['backbone.validation']
         },
         'setup': {
             deps: ['backbone.validation', 'ftscroller', 'jade', 'zepto-touch', 'zepto-cookie', 'spinjs', 'functional', 'aspect']
@@ -116,6 +110,15 @@ if (this.ENV === 'PROD') {
         });
 
     }).call(this);
+}else{
+    requirejs.onError = function (err) {
+        if (err.requireType === 'timeout') {
+            // tell user
+            console.log(err, err.stack, err.message, 'Module timeout error');
+        } else {
+            throw err;
+        }
+    };
 }
 //>>excludeEnd("i18nExclude");
 
@@ -144,7 +147,7 @@ define(
 
 //Main initialization block
 //TODO: Optimize displaying this block
-require(['domReady', 'spinjs', 'config', 'i18n!nls/app'], function (domReady, Spinner, config, i18n) {
+require(['domReady', 'spinjs', 'config'], function (domReady, Spinner, config) {
     var target = document.getElementById('boot-spinner');
     //Create new spinner
     new Spinner(config.spinner).spin(target);
@@ -178,7 +181,7 @@ require(['domReady', 'spinjs', 'config', 'i18n!nls/app'], function (domReady, Sp
         }
     });
     //Assign lang to the root object
-    root.i18n = i18n;
+    //root.i18n = i18n;
     //start the router and load the lang bundle
     require(['app'], function (Router) {
         root.App = root.App || {};
